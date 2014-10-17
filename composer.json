@@ -23,7 +23,8 @@
         "yiisoft/yii2-codeception": "*",
         "yiisoft/yii2-debug": "*",
         "yiisoft/yii2-gii": "*",
-        "yiisoft/yii2-faker": "*"
+        "yiisoft/yii2-faker": "*",
+        "zelenin/yii2-rbac-module": "dev-master"
     },
     "config": {
         "process-timeout": 1800

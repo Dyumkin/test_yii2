@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "93ba06c7f55c134fcfc2a4a38a89049e",
+    "hash": "43fbb5e1dda69939a90f6478f88271fa",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -102,16 +102,16 @@
         },
         {
             "name": "bower-asset/jquery.inputmask",
-            "version": "3.1.32",
+            "version": "3.1.33",
             "source": {
                 "type": "git",
                 "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
-                "reference": "bb776eb7e7be594fa77d5598e6f89d96029a8bac"
+                "reference": "0c6ce85c1bc12e81ecb0df62fbc62db116b7b53d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/bb776eb7e7be594fa77d5598e6f89d96029a8bac",
-                "reference": "bb776eb7e7be594fa77d5598e6f89d96029a8bac",
+                "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/0c6ce85c1bc12e81ecb0df62fbc62db116b7b53d",
+                "reference": "0c6ce85c1bc12e81ecb0df62fbc62db116b7b53d",
                 "shasum": ""
             },
             "require": {
@@ -369,12 +369,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "4b46a68dfbddcba32b94c49821e505aa3e1ef1c9"
+                "reference": "71740ec5f713fef708788db6470d283689eaa8fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/4b46a68dfbddcba32b94c49821e505aa3e1ef1c9",
-                "reference": "4b46a68dfbddcba32b94c49821e505aa3e1ef1c9",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/71740ec5f713fef708788db6470d283689eaa8fe",
+                "reference": "71740ec5f713fef708788db6470d283689eaa8fe",
                 "shasum": ""
             },
             "require": {
@@ -449,7 +449,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2014-10-14 13:36:43"
+            "time": "2014-10-17 11:32:54"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -758,12 +758,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-debug.git",
-                "reference": "f2cde70dc8d4571b5c2de8c0a71e4a99a464305d"
+                "reference": "45174662f937e87f1c9140912fefe260d6f83722"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/f2cde70dc8d4571b5c2de8c0a71e4a99a464305d",
-                "reference": "f2cde70dc8d4571b5c2de8c0a71e4a99a464305d",
+                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/45174662f937e87f1c9140912fefe260d6f83722",
+                "reference": "45174662f937e87f1c9140912fefe260d6f83722",
                 "shasum": ""
             },
             "require": {
@@ -797,7 +797,7 @@
                 "debugger",
                 "yii2"
             ],
-            "time": "2014-10-15 08:16:41"
+            "time": "2014-10-17 11:12:47"
         },
         {
             "name": "yiisoft/yii2-faker",
@@ -852,12 +852,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-gii.git",
-                "reference": "ab1545dc9fbccf42a344c84381982a114bfdfc51"
+                "reference": "e727a0c97d1921315e0a722dca56cb1fecb90c1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/ab1545dc9fbccf42a344c84381982a114bfdfc51",
-                "reference": "ab1545dc9fbccf42a344c84381982a114bfdfc51",
+                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/e727a0c97d1921315e0a722dca56cb1fecb90c1d",
+                "reference": "e727a0c97d1921315e0a722dca56cb1fecb90c1d",
                 "shasum": ""
             },
             "require": {
@@ -893,12 +893,61 @@
                 "gii",
                 "yii2"
             ],
-            "time": "2014-10-12 20:44:45"
+            "time": "2014-10-17 00:38:08"
+        },
+        {
+            "name": "zelenin/yii2-rbac-module",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zelenin/yii2-rbac-module.git",
+                "reference": "815ec2098d4c27649eb11a76b03b57a393dacf2f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zelenin/yii2-rbac-module/zipball/815ec2098d4c27649eb11a76b03b57a393dacf2f",
+                "reference": "815ec2098d4c27649eb11a76b03b57a393dacf2f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "bootstrap": "Zelenin\\yii\\modules\\Rbac\\Bootstrap"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Zelenin\\yii\\modules\\Rbac\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aleksandr Zelenin",
+                    "email": "aleksandr@zelenin.me",
+                    "homepage": "http://zelenin.me",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Yii2 RBAC module with generating assignments to DB from RBAC data store file rbac.php",
+            "homepage": "https://github.com/zelenin/yii2-rbac-module",
+            "keywords": [
+                "rbac",
+                "yii2"
+            ],
+            "time": "2014-06-30 00:00:00"
         }
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "zelenin/yii2-rbac-module": 20
+    },
     "prefer-stable": false,
     "platform": {
         "php": ">=5.4.0"
