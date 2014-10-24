@@ -5,7 +5,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use frontend\widgets\Alert;
-
+use frontend\widgets\Language;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -59,6 +59,7 @@ AppAsset::register($this);
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
+        <?= Language::widget();?>
         <?= $content ?>
         </div>
     </div>
