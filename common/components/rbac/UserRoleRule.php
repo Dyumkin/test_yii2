@@ -10,6 +10,27 @@
 namespace common\components\rbac;
 
 
-class UserRoleRule {
+use Yii;
+use yii\rbac\Rule;
+use yii\helpers\ArrayHelper;
+use common\models\User;
 
+class UserRoleRule extends Rule
+{
+    public $name = 'userRole';
+    public function execute($user, $item, $params)
+    {
+
+        $user = ArrayHelper::getValue($params, 'user', User::findOne($user));
+        if ($user) {
+            $role = $user->role;
+            if ($item->name === 'admin') {
+                return $role == User::ROLE_ADMIN;
+            }
+            elseif ($item->name === 'user') {
+                return $role == User::ROLE_ADMIN || $role == User::ROLE_USER;
+            }
+        }
+        return false;
+    }
 }

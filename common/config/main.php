@@ -9,18 +9,38 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'class'=>'common\components\lang\LangUrlManager',
+            'rules'=>[
+                '/' => 'site/index',
+                '<controller:\w+>/<action:\w+>/*'=>'<controller>/<action>',
+            ]
         ],
 
         'authManager' => [
-            'class' => \Zelenin\yii\modules\Rbac\components\DbManager::className(),
-            'itemFile' => '@common/config/rbac/items.php',
-            'assignmentFile' => '@common/config/rbac/assignments.php',
-            'ruleFile' => '@common/config/rbac/rules.php',
-            'defaultRole' => 'user',
-            'roleParam' => 'role', // User model attribute
-            // optional
-            'enableCaching' => false,
-            'cachingDuration' => 60
-        ]
+            'class' => 'yii\rbac\DbManager',
+            'defaultRoles' => [
+                'user',
+                'admin'
+            ],
+
+        ],
+
+        'request' => [
+            'class' => 'common\components\lang\LangRequest'
+        ],
+
+        'language'=>'ru-RU',
+        'i18n' => [
+            'translations' => [
+                '*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@common/messages',
+                    'sourceLanguage' => 'en',
+                    'fileMap' => [
+                        //'main' => 'main.php',
+                    ],
+                ],
+            ],
+        ],
     ],
 ];

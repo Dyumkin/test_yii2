@@ -1,6 +1,7 @@
 <?php
-namespace common\models;
+namespace backend\models;
 
+use common\models\User;
 use Yii;
 use yii\base\Model;
 
@@ -63,15 +64,23 @@ class LoginForm extends Model
 
     /**
      * Finds user by [[username]]
-     *
+     * Finds user by [[email]]
      * @return User|null
      */
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = User::findByUsername($this->username);
+            //Находим пользователя в БД по логину или эл.почте
+            $this->_user = User::find()
+                ->andWhere(['or', ['username' => $this->username],
+                    ['email' => $this->username]])
+                ->one();
+            //Проверяем права доступа, если нет, то делаем вид,
+            //что пользователь не найден.
+            if (!Yii::$app->user->can('dashboard', ['user' => $this->_user])) {
+                $this->_user = null;
+            }
         }
-
         return $this->_user;
     }
 }
