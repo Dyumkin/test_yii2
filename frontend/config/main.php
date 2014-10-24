@@ -29,5 +29,8 @@ return [
             'errorAction' => 'site/error',
         ],
     ],
+    'modules' => [
+        'gii' => 'yii\gii\Module',
+    ],
     'params' => $params,
 ];

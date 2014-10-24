@@ -11,8 +11,8 @@
     RewriteEngine On
 
     # Backend redirect
-    RewriteCond %{REQUEST_URI} ^(.*)$
-    RewriteRule ^(.*)$ backend/web/$1 [L]
+    RewriteCond %{REQUEST_URI} ^/backend
+    RewriteRule ^backend/(.*)$ backend/web/$1 [L]
 
     # Frontend redirect
     RewriteCond %{REQUEST_URI} ^(.*)$
