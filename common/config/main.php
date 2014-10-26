@@ -10,10 +10,10 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'class'=>'common\components\lang\LangUrlManager',
-            'rules'=>[
+            /*'rules'=>[
                 '/' => 'site/index',
-                '<controller:\w+>/<action:\w+>/*'=>'<controller>/<action>',
-            ]
+                '<controller:\w+>/<action:\w+>/'=>'<controller>/<action>',
+            ]*/
         ],
 
         'authManager' => [
