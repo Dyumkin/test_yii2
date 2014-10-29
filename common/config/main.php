@@ -10,10 +10,13 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'class'=>'common\components\lang\LangUrlManager',
-            /*'rules'=>[
+            'rules'=>[
                 '/' => 'site/index',
-                '<controller:\w+>/<action:\w+>/'=>'<controller>/<action>',
-            ]*/
+
+                '<controller:\w+>/<id:\d+>'=>'<controller>/view',
+                '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
+                '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+            ]
         ],
 
         'authManager' => [
@@ -25,20 +28,12 @@ return [
 
         ],
 
-        'request' => [
-            'class' => 'common\components\lang\LangRequest'
-        ],
-
         'language'=>'ru-RU',
         'i18n' => [
             'translations' => [
-                '*' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@common/messages',
+                'app' => [
+                    'class' => 'yii\i18n\DbMessageSource',
                     'sourceLanguage' => 'en',
-                    'fileMap' => [
-                        //'main' => 'main.php',
-                    ],
                 ],
             ],
         ],
