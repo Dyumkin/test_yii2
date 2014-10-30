@@ -35,6 +35,10 @@ return [
                     'class' => 'yii\i18n\DbMessageSource',
                     'sourceLanguage' => 'en',
                 ],
+                'blog' => [
+                    'class' => 'yii\i18n\DbMessageSource',
+                    'sourceLanguage' => 'en',
+                ],
             ],
         ],
     ],

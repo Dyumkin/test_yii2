@@ -14,8 +14,6 @@ class m141029_111644_table_post extends Migration
         $this->createTable('{{%blog}}', [
             'id' => Schema::TYPE_PK,
             'alias' => Schema::TYPE_STRING . '(100) NOT NULL',
-            'image_url' => Schema::TYPE_STRING . '(64) NOT NULL',
-            'preview_url' => Schema::TYPE_STRING . '(64) NOT NULL',
             'views' => Schema::TYPE_INTEGER . ' NOT NULL DEFAULT 0',
             'status_id' => 'tinyint(4) NOT NULL DEFAULT 0',
             'created_at' => Schema::TYPE_INTEGER . ' NOT NULL',
