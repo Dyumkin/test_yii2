@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\models\Lang;
 use yii\helpers\ArrayHelper;
+use dosamigos\ckeditor\CKEditor;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Blog */
@@ -13,28 +14,33 @@ use yii\helpers\ArrayHelper;
 ?>
 
 <div class="blog-form">
-
+    <div class="row">
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'alias')->textInput(['maxlength' => 100]) ?>
 
 
-    <?php foreach (ArrayHelper::map(Lang::find()->asArray()->all(), 'id', 'name') as $langName): ?>
-        <div class="form-group-blog">
-            <?= Html::label($langName, null, ['class'=>'col-sm-2 control-label']) ?>
+    <?php foreach (ArrayHelper::map(Lang::find()->asArray()->all(), 'id', 'name') as $id => $langName): ?>
 
-            <div class="col-sm-2">
-                <?= $form->field($content, 'title')->textInput(); ?>
-            </div>
+                <?= $form->field($content, 'title')->textInput( ['class' => 'lang-'.$id]); ?>
 
-            <div class="col-sm-2">
-                <?= $form->field($content, 'snippet')->textInput(); ?>
-            </div>
+                <?= $form->field($content, 'snippet')->widget(CKEditor::className(), [
+            'options' => [
+                'rows' => 4,
+                'class' => 'lang-'.$id
+            ],
 
-            <div class="col-sm-3">
-                <?= $form->field($content, 'content')->textInput(); ?>
-            </div>
-        </div>
+        ]); ?>
+
+                <?= $form->field($content, 'content')->widget(CKEditor::className(), [
+            'options' => [
+                'rows' => 4,
+                'class' => 'lang-'.$id
+            ],
+            'clientOptions' => require(__DIR__ . '/../../../common/config/ckeditor/full-config.php')
+        ]); ?>
+
+
     <?php endforeach; ?>
 
 
@@ -43,5 +49,5 @@ use yii\helpers\ArrayHelper;
     </div>
 
     <?php ActiveForm::end(); ?>
-
+    </div>
 </div>
