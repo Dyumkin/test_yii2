@@ -14,34 +14,21 @@ use dosamigos\ckeditor\CKEditor;
 ?>
 
 <div class="blog-form">
-    <div class="row">
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'alias')->textInput(['maxlength' => 100]) ?>
 
 
-    <?php foreach (ArrayHelper::map(Lang::find()->asArray()->all(), 'id', 'name') as $id => $langName): ?>
+    <?= $form->field($content, 'lang_id')->dropDownList(ArrayHelper::map(Lang::find()->asArray()->all(), 'id', 'name')); ?>
 
-                <?= $form->field($content, 'title')->textInput( ['class' => 'lang-'.$id]); ?>
+                <?= $form->field($content, 'title')->textInput(); ?>
 
-                <?= $form->field($content, 'snippet')->widget(CKEditor::className(), [
-            'options' => [
-                'rows' => 4,
-                'class' => 'lang-'.$id
-            ],
+                <?= $form->field($content, 'snippet')->textarea(); ?>
 
-        ]); ?>
-
-                <?= $form->field($content, 'content')->widget(CKEditor::className(), [
-            'options' => [
-                'rows' => 4,
-                'class' => 'lang-'.$id
-            ],
-            'clientOptions' => require(__DIR__ . '/../../../common/config/ckeditor/full-config.php')
-        ]); ?>
+                <?= $form->field($content, 'content')->textarea(); ?>
 
 
-    <?php endforeach; ?>
+
 
 
     <div class="form-group">
@@ -50,4 +37,4 @@ use dosamigos\ckeditor\CKEditor;
 
     <?php ActiveForm::end(); ?>
     </div>
-</div>
+

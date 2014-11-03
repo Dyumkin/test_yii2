@@ -66,13 +66,15 @@ class BlogController extends Controller
         $lang  = new Lang();
         $blog  = new BlogLang();
 
-        $model->setScenario('create');
+        $model->setScenario('insert');
 
         if ($model->load(Yii::$app->request->post())) {
-           // $model->loadBlogLangs(Yii::$app->request->post());
+           $model->setBlogLangs(Yii::$app->request->post()['BlogLang']);
 
             if($model->save()){
-            return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+               throw new \Exception('Dont Save model',404);
             }
         } else {
             return $this->render('create', [

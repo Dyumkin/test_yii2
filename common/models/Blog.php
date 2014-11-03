@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "blog".
@@ -23,6 +24,9 @@ class Blog extends \yii\db\ActiveRecord
     /** Published status **/
     const STATUS_PUBLISHED = 1;
 
+    const SCENARIO_INSERT = 'insert';
+    const SCENARIO_UPDATE = 'update';
+
     /**
      * @inheritdoc
      */
@@ -37,9 +41,17 @@ class Blog extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['alias', 'created_at', 'updated_at'], 'required'],
+            [['alias'], 'required'],
             [['views', 'status_id', 'created_at', 'updated_at'], 'integer'],
             [['alias'], 'string', 'max' => 100]
+        ];
+    }
+
+    public function scenarios()
+    {
+        return [
+            self::SCENARIO_INSERT => ['alias'],
+            self::SCENARIO_UPDATE => ['alias'],
         ];
     }
 
@@ -61,9 +73,8 @@ class Blog extends \yii\db\ActiveRecord
     public function transactions()
     {
         return [
-            'insert' => self::OP_INSERT,
-            'update' => self::OP_UPDATE,
-            'delete' => self::OP_DELETE
+            self::SCENARIO_INSERT => self::OP_INSERT,
+            self::SCENARIO_UPDATE => self::OP_UPDATE,
         ];
     }
 
@@ -88,7 +99,20 @@ class Blog extends \yii\db\ActiveRecord
 
     }
 
-/*    public function afterSave($insert)
+    public function behaviors()
+    {
+        return [
+            'dateTimeStampBehavior' => [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    self::EVENT_BEFORE_INSERT => ['create_at', 'update_at'],
+                    self::EVENT_BEFORE_UPDATE => 'update_at',
+                ]
+            ]
+        ];
+    }
+
+    public function afterSave($insert, $changedAttributes)
     {
 
         $relatedRecords = $this->getRelatedRecords();
@@ -98,9 +122,9 @@ class Blog extends \yii\db\ActiveRecord
                 $this->link('blogLangs', $blogLang);
             }
         }
-    }*/
+    }
 
-    public function loadBlogLangs($blogLangs)
+/*    public function loadBlogLangs($blogLangs)
     {
         $posts = [];
 
@@ -113,6 +137,6 @@ class Blog extends \yii\db\ActiveRecord
         }
 
         $this->setBlogLangs($posts);
-    }
+    }*/
 
 }
