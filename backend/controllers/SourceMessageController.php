@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\Message;
 use Yii;
 use backend\models\SourceMessage;
 use yii\data\ActiveDataProvider;
@@ -58,7 +59,7 @@ class SourceMessageController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+/*    public function actionCreate()
     {
         $model = new SourceMessage();
 
@@ -69,7 +70,7 @@ class SourceMessageController extends Controller
                 'model' => $model,
             ]);
         }
-    }
+    }*/
 
     /**
      * Updates an existing SourceMessage model.
@@ -81,7 +82,18 @@ class SourceMessageController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if (Yii::$app->request->post()) {
+
+            $request = Yii::$app->request->post();
+
+            foreach ($model->messages as $message)
+            {
+                $data['Message'] = $request['Message'][$message->language];
+                $message->load($data);
+                $message->save();
+            }
+
+
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
