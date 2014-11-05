@@ -37,7 +37,7 @@ class BlogLang extends \yii\db\ActiveRecord
             [['title', 'snippet', 'content'], 'required'],
             [['snippet', 'content'], 'string'],
             [['title'], 'string', 'max' => 100],
-            [['title', 'snippet', 'content'], 'trim'],
+            [['title'], 'trim'],
         ];
     }
 

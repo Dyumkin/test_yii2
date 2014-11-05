@@ -5,8 +5,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Blog */
-/* @var $content common\models\BlogLang */
-/* @var $language common\models\Lang */
+/* @var $posts[] common\models\BlogLang */
 
 $this->title = Yii::t('blog', 'Create {modelClass}', [
     'modelClass' => 'Blog',
@@ -20,8 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
-        'content' => $content,
-        'language' => $language
+        'posts' => $posts,
     ]) ?>
 
 </div>

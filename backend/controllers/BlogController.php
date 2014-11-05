@@ -8,8 +8,11 @@ use common\models\BlogLang;
 use common\models\Lang;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
+use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
+use common\components\helpers\BlogHelper;
 
 /**
  * BlogController implements the CRUD actions for Blog model.
@@ -63,24 +66,29 @@ class BlogController extends Controller
     public function actionCreate()
     {
         $model = new Blog();
-        $lang  = new Lang();
-        $blog  = new BlogLang();
 
-        $model->setScenario('insert');
+        $posts = [];
+        foreach (ArrayHelper::map(Lang::find()->asArray()->all(), 'id', 'url') as $langName)
+        {
+            $post  = new BlogLang();
+            $posts[$langName] = $post;
+        }
+
+        $model->setScenario(Blog::SCENARIO_INSERT);
 
         if ($model->load(Yii::$app->request->post())) {
-           $model->setBlogLangs(Yii::$app->request->post()['BlogLang']);
+            $request = Yii::$app->request->post();
+           $model->loadBlogLangs($request['BlogLang']);
 
             if($model->save()){
                 return $this->redirect(['view', 'id' => $model->id]);
             } else {
-               throw new \Exception('Dont Save model',404);
+               throw new HttpException(500, 'Don`t Save model', 500);
             }
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'content' => $blog,
-                'language' => $lang
+                'posts' => $posts,
             ]);
         }
     }
@@ -94,12 +102,24 @@ class BlogController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $posts = $model->blogLangs;
+        $posts = BlogHelper::changeBlogKeys($posts);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $model->setScenario(Blog::SCENARIO_UPDATE);
+
+        if ($model->load(Yii::$app->request->post())) {
+            $post = Yii::$app->request->post();
+            $model->loadBlogLangs($post['BlogLang']);
+
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }else {
+                throw new HttpException(500, 'Don`t Save model', 500);
+            }
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'posts' => $posts,
             ]);
         }
     }

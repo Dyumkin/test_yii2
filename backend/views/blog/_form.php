@@ -8,28 +8,37 @@ use dosamigos\ckeditor\CKEditor;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Blog */
-/* @var $content common\models\BlogLang */
-/* @var $language common\models\Lang */
+/* @var $posts[] common\models\BlogLang */
+/* @var $post common\models\BlogLang */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
 <div class="blog-form">
-    <?php $form = ActiveForm::begin(); ?>
+
+    <?php $form = ActiveForm::begin([
+        'id' => 'blog-form',
+        'options' => ['class' => 'form-horizontal'],
+    ]); ?>
 
     <?= $form->field($model, 'alias')->textInput(['maxlength' => 100]) ?>
 
+    <?php foreach ( $posts as $lang => $post): ?>
 
-    <?= $form->field($content, 'lang_id')->dropDownList(ArrayHelper::map(Lang::find()->asArray()->all(), 'id', 'name')); ?>
+        <?php if (isset($post->id)): ?>
 
-                <?= $form->field($content, 'title')->textInput(); ?>
+            <?= Html::activeHiddenInput($post, 'id', ['name' => 'BlogLang['.$lang.'][id]']); ?>
 
-                <?= $form->field($content, 'snippet')->textarea(); ?>
+        <?php endif; ?>
 
-                <?= $form->field($content, 'content')->textarea(); ?>
+        <?= Html::label(Lang::getLangByUrl($lang)->name); ?>
 
+                <?= $form->field($post, 'title', ['enableClientValidation' => false])->textInput(['name' => 'BlogLang['.$lang.'][title]']); ?>
 
+                <?= $form->field($post, 'snippet')->textarea(['name' => 'BlogLang['.$lang.'][snippet]']); ?>
 
+                <?= $form->field($post, 'content')->textarea(['name' => 'BlogLang['.$lang.'][content]']); ?>
 
+    <?php endforeach; ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('blog', 'Create') : Yii::t('blog', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

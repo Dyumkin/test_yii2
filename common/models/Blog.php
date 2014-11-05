@@ -95,8 +95,22 @@ class Blog extends \yii\db\ActiveRecord
 
     public function setBlogLangs($posts)
     {
+
         $this->populateRelation('blogLangs', $posts);
 
+    }
+
+    public function loadBlogLangs($blogs)
+    {
+        $posts = [];
+        foreach($blogs as $lang => $data)
+        {
+            $post = new BlogLang($data);
+            $post->lang_id = Lang::getLangByUrl($lang)->id;
+            $posts[] = $post;
+        }
+
+        $this->setBlogLangs($posts);
     }
 
     public function behaviors()
@@ -105,11 +119,24 @@ class Blog extends \yii\db\ActiveRecord
             'dateTimeStampBehavior' => [
                 'class' => TimestampBehavior::className(),
                 'attributes' => [
-                    self::EVENT_BEFORE_INSERT => ['create_at', 'update_at'],
-                    self::EVENT_BEFORE_UPDATE => 'update_at',
+                    self::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    self::EVENT_BEFORE_UPDATE => 'updated_at',
                 ]
             ]
         ];
+    }
+
+    public function beforeSave($insert)
+    {
+        if (!parent::beforeSave($insert)) {
+            return false;
+        }
+
+
+            $this->views = 1;
+            $this->status_id = self::STATUS_UNPUBLISHED;
+
+        return true;
     }
 
     public function afterSave($insert, $changedAttributes)
@@ -118,8 +145,8 @@ class Blog extends \yii\db\ActiveRecord
         $relatedRecords = $this->getRelatedRecords();
 
         if (isset($relatedRecords['blogLangs'])) {
-            foreach ($relatedRecords['blogLangs'] as $blogLang) {
-                $this->link('blogLangs', $blogLang);
+            foreach($relatedRecords['blogLangs'] as $blog){
+                $this->link('blogLangs', $blog);
             }
         }
     }
