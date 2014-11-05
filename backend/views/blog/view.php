@@ -37,4 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+    <div>
+        <?= $model->content->title; ?>
+    </div>
 </div>

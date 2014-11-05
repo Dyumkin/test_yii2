@@ -105,8 +105,14 @@ class Blog extends \yii\db\ActiveRecord
         $posts = [];
         foreach($blogs as $lang => $data)
         {
-            $post = new BlogLang($data);
-            $post->lang_id = Lang::getLangByUrl($lang)->id;
+            if(isset($data['id']) && !empty($data['id']))
+            {
+                $post = BlogLang::findOne($data['id']);
+                $post->setAttributes($data);
+            } else {
+                $post = new BlogLang($data);
+                $post->lang_id = Lang::getLangByUrl($lang)->id;
+            }
             $posts[] = $post;
         }
 

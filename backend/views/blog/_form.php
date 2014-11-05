@@ -34,9 +34,9 @@ use dosamigos\ckeditor\CKEditor;
 
                 <?= $form->field($post, 'title', ['enableClientValidation' => false])->textInput(['name' => 'BlogLang['.$lang.'][title]']); ?>
 
-                <?= $form->field($post, 'snippet')->textarea(['name' => 'BlogLang['.$lang.'][snippet]']); ?>
+                <?= $form->field($post, 'snippet', ['enableClientValidation' => false])->textarea(['name' => 'BlogLang['.$lang.'][snippet]']); ?>
 
-                <?= $form->field($post, 'content')->textarea(['name' => 'BlogLang['.$lang.'][content]']); ?>
+                <?= $form->field($post, 'content', ['enableClientValidation' => false])->textarea(['name' => 'BlogLang['.$lang.'][content]']); ?>
 
     <?php endforeach; ?>
 
