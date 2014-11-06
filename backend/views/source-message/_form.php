@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 
         <?= Html::label($message->language); ?>
 
-        <?= $form->field($message, 'translation')->textInput(['name' => 'Message['.$message->language.'][translation]']); ?>
+        <?= $form->field($message, 'translation', ['enableClientValidation' => false])->textInput(['name' => 'Message['.$message->language.'][translation]']); ?>
 
     <?php endforeach; ?>
 
