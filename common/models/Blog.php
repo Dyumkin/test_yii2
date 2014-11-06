@@ -62,11 +62,11 @@ class Blog extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('blog', 'ID'),
-            'alias' => Yii::t('blog', 'Alias'),
-            'views' => Yii::t('blog', 'Views'),
-            'status_id' => Yii::t('blog', 'Status ID'),
-            'created_at' => Yii::t('blog', 'Created At'),
-            'updated_at' => Yii::t('blog', 'Updated At'),
+            'alias' => Yii::t('blog', 'ALIAS'),
+            'views' => Yii::t('blog', 'VIEWS'),
+            'status_id' => Yii::t('blog', 'STATUS'),
+            'created_at' => Yii::t('blog', 'CREATE_DATE'),
+            'updated_at' => Yii::t('blog', 'UPDATE_DATE'),
         ];
     }
 
@@ -95,9 +95,7 @@ class Blog extends \yii\db\ActiveRecord
 
     public function setBlogLangs($posts)
     {
-
         $this->populateRelation('blogLangs', $posts);
-
     }
 
     public function loadBlogLangs($blogs)
@@ -138,9 +136,9 @@ class Blog extends \yii\db\ActiveRecord
             return false;
         }
 
-
-            $this->views = 1;
+        if ($this->isNewRecord){
             $this->status_id = self::STATUS_UNPUBLISHED;
+        }
 
         return true;
     }
@@ -157,19 +155,30 @@ class Blog extends \yii\db\ActiveRecord
         }
     }
 
-/*    public function loadBlogLangs($blogLangs)
+    /**
+     * @return bool
+     */
+    public function updateViews()
     {
-        $posts = [];
+        return $this->updateCounters(['views' => 1]);
+    }
 
-        foreach ($blogLangs as $lang => $value) {
-            $post = new BlogLang();
-            $post->title = $value->name;
-            $post->content = $value->content;
-            $post->snippet = $value->snippet;
-            $posts[] = $post;
-        }
-
-        $this->setBlogLangs($posts);
-    }*/
-
+    /**
+     * @return string Readable blog status
+     */
+    public function getStatus()
+    {
+        $statuses = self::getStatusArray();
+        return $statuses[$this->status_id];
+    }
+    /**
+     * @return array Status array.
+     */
+    public static function getStatusArray()
+    {
+        return [
+            self::STATUS_UNPUBLISHED => Yii::t('blog', 'STATUS_UNPUBLISHED'),
+            self::STATUS_PUBLISHED => Yii::t('blog', 'STATUS_PUBLISHED')
+        ];
+    }
 }

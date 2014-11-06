@@ -37,12 +37,14 @@ class BlogController extends Controller
      */
     public function actionIndex()
     {
+        $statusArray = Blog::getStatusArray();
         $dataProvider = new ActiveDataProvider([
             'query' => Blog::find(),
         ]);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'statusArray'  => $statusArray
         ]);
     }
 

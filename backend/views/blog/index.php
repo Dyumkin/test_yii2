@@ -5,6 +5,7 @@ use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var array $statusArray Statuses array */
 
 $this->title = Yii::t('blog', 'Blogs');
 $this->params['breadcrumbs'][] = $this->title;
@@ -22,14 +23,42 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'alias',
+
+            [
+                'attribute' => 'alias',
+                'format' => 'html',
+                'value' => function ($model) {
+                    return Html::a(
+                        $model['alias'],
+                        ['view', 'id' => $model['id']]
+                    );
+                }
+            ],
+
             'views',
-            'status_id',
-            'created_at',
-            // 'updated_at',
+            [
+                'attribute' => 'status_id',
+                'format' => 'html',
+                'value' => function ($model) {
+                    $class = ($model->status_id === $model::STATUS_PUBLISHED) ? 'label-success' : 'label-danger';
+                    return '<span class="label ' . $class . '">' . $model->status . '</span>';
+                },
+
+            ],
+
+            [
+                'attribute' => 'created_at',
+                'format' => 'datetime',
+
+            ],
+
+            [
+                'attribute' => 'updated_at',
+                'format' => 'datetime',
+
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

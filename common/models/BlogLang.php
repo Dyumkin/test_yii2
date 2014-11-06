@@ -48,11 +48,11 @@ class BlogLang extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('blog', 'ID'),
-            'post_id' => Yii::t('blog', 'Post ID'),
-            'lang_id' => Yii::t('blog', 'Lang ID'),
-            'title' => Yii::t('blog', 'Title'),
-            'snippet' => Yii::t('blog', 'Snippet'),
-            'content' => Yii::t('blog', 'Content'),
+            'post_id' => Yii::t('blog', 'POST_ID'),
+            'lang_id' => Yii::t('blog', 'LANG_ID'),
+            'title' => Yii::t('blog', 'TITLE'),
+            'snippet' => Yii::t('blog', 'SNIPPET'),
+            'content' => Yii::t('blog', 'CONTENT'),
         ];
     }
 
