@@ -33,9 +33,9 @@ class BlogController extends Controller
     function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Blog::find()->andWhere(['status_id' => Blog::STATUS_UNPUBLISHED]),
+            'query' => Blog::find()->andWhere(['status_id' => Blog::STATUS_PUBLISHED]),
             'pagination' => [
-                'pageSize' => 10
+                'pageSize' => Yii::$app->params['pageSize']
             ]
         ]);
         return $this->render('index', [

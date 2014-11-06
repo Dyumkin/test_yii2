@@ -79,13 +79,13 @@ class BlogController extends Controller
         $model->setScenario(Blog::SCENARIO_INSERT);
 
         if ($model->load(Yii::$app->request->post())) {
-            $request = Yii::$app->request->post();
-           $model->loadBlogLangs($request['BlogLang']);
+           $model->loadBlogLangs(Yii::$app->request->post('BlogLang'));
 
             if($model->save()){
                 return $this->redirect(['view', 'id' => $model->id]);
             } else {
-               throw new HttpException(500, 'Don`t Save model', 500);
+                Yii::$app->session->setFlash('danger', Yii::t('blog', 'BACKEND_FLASH_FAIL_ADMIN_CREATE'));
+                return $this->refresh();
             }
         } else {
             return $this->render('create', [
@@ -110,13 +110,13 @@ class BlogController extends Controller
         $model->setScenario(Blog::SCENARIO_UPDATE);
 
         if ($model->load(Yii::$app->request->post())) {
-            $post = Yii::$app->request->post();
-            $model->loadBlogLangs($post['BlogLang']);
+            $model->loadBlogLangs(Yii::$app->request->post('BlogLang'));
 
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }else {
-                throw new HttpException(500, 'Don`t Save model', 500);
+                Yii::$app->session->setFlash('danger', Yii::t('blog', 'BACKEND_FLASH_FAIL_ADMIN_CREATE'));
+                return $this->refresh();
             }
         } else {
             return $this->render('update', [
