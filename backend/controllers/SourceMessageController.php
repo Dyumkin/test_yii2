@@ -87,15 +87,11 @@ class SourceMessageController extends Controller
 
             $request = Yii::$app->request->post();
 
-            $messageData = BackendHelper::unsetEmptyAttribute($request['Message']);
-
             foreach ($model->messages as $message)
             {
-                $data['Message'] = $messageData[$message->language];
-                if (!empty($data['Message'])) {
-                    $message->load($data);
-                    $message->save();
-                }
+                $data['Message'] = $request['Message'][$message->language];
+                $message->load($data);
+                $message->save();
             }
 
 

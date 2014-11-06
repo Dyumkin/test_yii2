@@ -55,4 +55,18 @@ class Message extends \yii\db\ActiveRecord
     {
         return $this->hasOne(SourceMessage::className(), ['id' => 'id']);
     }
+
+    public function beforeSave($insert)
+    {
+        if (!parent::beforeSave($insert)) {
+            return false;
+        }
+
+        if (empty($this->translation))
+        {
+            $this->translation = null;
+        }
+
+        return true;
+    }
 }
