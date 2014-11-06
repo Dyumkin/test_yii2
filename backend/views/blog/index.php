@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     'modelClass' => 'Blog',
 ]), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
+    <?php \yii\widgets\Pjax::begin(); ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
@@ -42,8 +42,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'status_id',
                 'format' => 'html',
                 'value' => function ($model) {
-                    $class = ($model->status_id === $model::STATUS_PUBLISHED) ? 'label-success' : 'label-danger';
-                    return '<span class="label ' . $class . '">' . $model->status . '</span>';
+                    $class = ($model->status_id === $model::STATUS_PUBLISHED) ? 'btn btn-success' : 'btn btn-danger';
+                    return Html::a($model->status, ['updateStatus', 'id' => $model->id], ['class' => $class]);
+
+                    //return '<span class="label ' . $class . '">' . $model->status . '</span>';
                 },
 
             ],
@@ -63,5 +65,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-
+    <?php \yii\widgets\Pjax::end(); ?>
 </div>

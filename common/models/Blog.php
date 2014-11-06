@@ -181,4 +181,20 @@ class Blog extends \yii\db\ActiveRecord
             self::STATUS_PUBLISHED => Yii::t('blog', 'STATUS_PUBLISHED')
         ];
     }
+
+    /**
+     * @param $status int
+     * @return bool
+     */
+    public function updateStatus($status)
+    {
+        $statuses = self::getStatusArray();
+
+        if (!array_key_exists($status, $statuses))
+        {
+            return false;
+        }
+
+        return $this->updateCounters(['status' => $status]);
+    }
 }

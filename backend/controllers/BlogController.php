@@ -139,6 +139,16 @@ class BlogController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionUpdateStatus($id)
+    {
+        $model = $this->findModel($id);
+
+        $statuses = $model->getStatusArray();
+
+        $currentStatus = $model->status_id;
+
+    }
+
     /**
      * Finds the Blog model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
