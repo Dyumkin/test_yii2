@@ -184,7 +184,7 @@ class Blog extends \yii\db\ActiveRecord
 
     /**
      * @param $status int
-     * @return bool
+     * @return bool|int
      */
     public function updateStatus($status)
     {
@@ -195,6 +195,6 @@ class Blog extends \yii\db\ActiveRecord
             return false;
         }
 
-        return $this->updateCounters(['status' => $status]);
+        return $this->updateAttributes(['status_id' => $status]);
     }
 }

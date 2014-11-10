@@ -9,8 +9,16 @@ use yii\grid\GridView;
 
 $this->title = Yii::t('blog', 'Blogs');
 $this->params['breadcrumbs'][] = $this->title;
+
+$this->registerJsFile('/js/grid.js', [\yii\web\JqueryAsset::className()]);
 ?>
-<div class="blog-index">
+
+<?php if($message = \yii::$app->session->getFlash('message')) {?>
+    <script>
+        alert('<?=$message?>');
+    </script>
+<?php }?>
+
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -19,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
     'modelClass' => 'Blog',
 ]), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?php \yii\widgets\Pjax::begin(); ?>
+    <?php \yii\widgets\Pjax::begin(['options' => ['class' => 'pjax-wraper']]); ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
@@ -40,10 +48,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'views',
             [
                 'attribute' => 'status_id',
-                'format' => 'html',
+                'format' => 'raw',
                 'value' => function ($model) {
-                    $class = ($model->status_id === $model::STATUS_PUBLISHED) ? 'btn btn-success' : 'btn btn-danger';
-                    return Html::a($model->status, ['updateStatus', 'id' => $model->id], ['class' => $class]);
+                    $class = ($model['status_id'] === $model::STATUS_PUBLISHED) ? 'btn btn-success' : 'btn btn-danger';
+                    return Html::a($model['status'], ['update-status', 'id' => $model['id']], ['data-pjax' => '0','class' => 'grid-action']);
 
                     //return '<span class="label ' . $class . '">' . $model->status . '</span>';
                 },
@@ -66,4 +74,4 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
     <?php \yii\widgets\Pjax::end(); ?>
-</div>
+

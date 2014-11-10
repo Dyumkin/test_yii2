@@ -143,9 +143,24 @@ class BlogController extends Controller
     {
         $model = $this->findModel($id);
 
-        $statuses = $model->getStatusArray();
+        $updateStatus = null;
 
-        $currentStatus = $model->status_id;
+        if ($model->status_id === Blog::STATUS_PUBLISHED)
+        {
+            $updateStatus = Blog::STATUS_UNPUBLISHED;
+        } else if ($model->status_id === Blog::STATUS_UNPUBLISHED)
+        {
+            $updateStatus = Blog::STATUS_PUBLISHED;
+        }
+
+        if($model->updateStatus($updateStatus))
+        {
+            Yii::$app->session->setFlash('message', Yii::t('blog', 'BACKEND_FLASH_ADMIN_STATUS_UPDATE'));
+            return true;
+        }
+
+        Yii::$app->session->setFlash('danger', Yii::t('blog', 'BACKEND_FLASH_FAIL_ADMIN_STATUS_UPDATE'));
+        return false;
 
     }
 
