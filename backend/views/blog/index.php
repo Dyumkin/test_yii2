@@ -10,7 +10,6 @@ use yii\grid\GridView;
 $this->title = Yii::t('blog', 'Blogs');
 $this->params['breadcrumbs'][] = $this->title;
 
-$this->registerJsFile('/js/grid.js', [\yii\web\JqueryAsset::className()]);
 ?>
 
 <?php if($message = \yii::$app->session->getFlash('message')) {?>
@@ -51,9 +50,7 @@ $this->registerJsFile('/js/grid.js', [\yii\web\JqueryAsset::className()]);
                 'format' => 'raw',
                 'value' => function ($model) {
                     $class = ($model['status_id'] === $model::STATUS_PUBLISHED) ? 'btn btn-success' : 'btn btn-danger';
-                    return Html::a($model['status'], ['update-status', 'id' => $model['id']], ['data-pjax' => '0','class' => 'grid-action']);
-
-                    //return '<span class="label ' . $class . '">' . $model->status . '</span>';
+                    return Html::a($model['status'], ['update-status', 'id' => $model['id']], ['class' => $class]);
                 },
 
             ],
