@@ -20,10 +20,10 @@ use yii\helpers\Url;
     <?php foreach ($models as $comment) : ?>
         <div class="media" data-comment="parent" data-comment-id="<?= $comment->id ?>">
             <?php /*$avatar = $comment->author->profile->avatar_url ? $comment->author->profile->urlAttribute('avatar_url') : Yii::$app->assetManager->publish('@vova07/themes/site/images/blog/avatar3.png')[1];*/
-                $avatar = 'image/1.png'
+                $avatar = Yii::$app->assetManager->publish('@frontend/web/image/1.png')[1];
             ?>
             <div class="pull-left">
-                <img src="<?= $avatar ?>" class="avatar img-circle width-50" alt="avatar"/>
+                <img src="<?= $avatar ?>" class="avatar img-circle" width="50" alt="avatar"/>
             </div>
             <div class="media-body">
                 <div class="well" data-comment="append">
