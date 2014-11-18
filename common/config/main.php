@@ -39,6 +39,18 @@ return [
                     'class' => 'yii\i18n\DbMessageSource',
                     'sourceLanguage' => 'en',
                 ],
+
+                'comments' => [
+                    'class' => 'yii\i18n\DbMessageSource',
+                    'sourceLanguage' => 'en',
+                ],
+
+                'comments-models' => [
+                    'class' => 'yii\i18n\DbMessageSource',
+                    'sourceLanguage' => 'en',
+                ],
+
+
             ],
         ],
     ],

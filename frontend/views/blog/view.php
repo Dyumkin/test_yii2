@@ -35,16 +35,14 @@ $this->params['breadcrumbs'] = [
                 </div>
                 <?= $model->content->content ?>
 
-                <?php /*if (Yii::$app->base->hasExtension('comments') && Yii::$app->user->can('viewComments')) :
-                        echo \vova07\comments\widgets\Comments::widget(
+                <?php echo \frontend\widgets\Comment::widget(
                             [
                                 'model' => $model,
                                 'jsOptions' => [
                                     'offset' => 80
                                 ]
                             ]
-                        );
-                    endif;*/ ?>
+                        ); ?>
 
             </div>
         </div>
