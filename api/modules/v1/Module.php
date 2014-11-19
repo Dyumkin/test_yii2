@@ -13,6 +13,8 @@ class Module extends \yii\base\Module
 
     public function init()
     {
-        parent::init();        
+        parent::init();
+
+        \Yii::$app->user->enableSession = false;
     }
 }
