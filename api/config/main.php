@@ -36,8 +36,9 @@ return [
             'showScriptName' => false,
             'rules' => [
                 [
-                    'class' => 'yii\rest\UrlRule', 
-                    'controller' => 'v1/country'
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => ['v1/blog', 'v1/country'],
+                    'pluralize' => false
                 ]
             ],        
         ]
