@@ -9,6 +9,7 @@
 
 namespace api\modules\v1\controllers;
 
+use api\modules\v1\models\Blog;
 use yii\rest\ActiveController;
 use yii\helpers\ArrayHelper;
 use yii\filters\auth\CompositeAuth;
@@ -35,6 +36,42 @@ class BlogController extends ActiveController
                 ]
             ]
         );
+    }
+
+    public function actions()
+    {
+        return [
+            'index' => [
+                'class' => 'api\modules\v1\components\blog\IndexAction',
+                'modelClass' => $this->modelClass,
+                'checkAccess' => [$this, 'checkAccess'],
+            ],
+            'view' => [
+                'class' => 'api\modules\v1\components\blog\ViewAction',
+                'modelClass' => $this->modelClass,
+                'checkAccess' => [$this, 'checkAccess'],
+            ],
+            'create' => [
+                'class' => 'api\modules\v1\components\blog\CreateAction',
+                'modelClass' => $this->modelClass,
+                'checkAccess' => [$this, 'checkAccess'],
+                'scenario' => Blog::SCENARIO_INSERT,
+            ],
+            'update' => [
+                'class' => 'api\modules\v1\components\blog\UpdateAction',
+                'modelClass' => $this->modelClass,
+                'checkAccess' => [$this, 'checkAccess'],
+                'scenario' => Blog::SCENARIO_UPDATE,
+            ],
+            'delete' => [
+                'class' => 'yii\rest\DeleteAction',
+                'modelClass' => $this->modelClass,
+                'checkAccess' => [$this, 'checkAccess'],
+            ],
+            'options' => [
+                'class' => 'yii\rest\OptionsAction',
+            ],
+        ];
     }
 
 }

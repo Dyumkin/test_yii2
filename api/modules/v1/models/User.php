@@ -9,15 +9,14 @@
 
 namespace api\modules\v1\models;
 
-use yii\base\NotSupportedException;
+use common\models\User as CommonUser;
 
-class User extends \common\models\User
+class User extends CommonUser
 {
 
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        // TODO сделать
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented бла бла бла.');
+        return static::findOne(['access_token' => $token]);
     }
 
 }
