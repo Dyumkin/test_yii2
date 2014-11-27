@@ -13,7 +13,7 @@ namespace common\components\helpers;
 use yii\helpers\ArrayHelper;
 use common\models\BlogLang;
 
-class BlogHelper extends ArrayHelper {
+class CommonHelper extends ArrayHelper {
 
     /**
      * @param $array[] BlogLang
@@ -37,4 +37,14 @@ class BlogHelper extends ArrayHelper {
 
         return $newArray;
     }
+
+    /**
+     * @param $string string
+     * @return int
+     */
+    public static function generateCRC32Hash($string)
+    {
+        return (int)sprintf('%u', crc32($string));
+    }
+
 }

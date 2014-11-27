@@ -267,7 +267,7 @@ class Comments extends \yii\db\ActiveRecord
         $models = self::find()->where([
             'model_id' => $model,
             'model_class' => $class
-        ])->orderBy(['parent_id' => 'ASC', 'created_at' => 'ASC'])->/*with(['author'])->*/all();
+        ])->orderBy(['parent_id' => 'ASC', 'created_at' => 'ASC'])->all();
         if ($models !== null) {
             $models = self::buildTree($models);
         }

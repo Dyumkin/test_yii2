@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use common\components\helpers\CommonHelper;
 use common\models\Comments;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\ArrayHelper;
@@ -87,7 +88,7 @@ class CommentsModel extends \yii\db\ActiveRecord
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
-            $this->id = crc32($this->name);
+            $this->id = CommonHelper::generateCRC32Hash($this->name);
             return true;
         } else {
             return false;
@@ -119,7 +120,7 @@ class CommentsModel extends \yii\db\ActiveRecord
      */
     public static function findIdentity($id)
     {
-        $id = is_numeric($id) ? $id : crc32($id);
+        $id = is_numeric($id) ? $id : CommonHelper::generateCRC32Hash($id);
         return self::findOne($id);
     }
 

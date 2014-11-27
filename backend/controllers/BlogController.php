@@ -12,7 +12,7 @@ use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
-use common\components\helpers\BlogHelper;
+use common\components\helpers\CommonHelper;
 
 /**
  * BlogController implements the CRUD actions for Blog model.
@@ -105,7 +105,7 @@ class BlogController extends Controller
     {
         $model = $this->findModel($id);
         $posts = $model->blogLangs;
-        $posts = BlogHelper::changeBlogKeys($posts);
+        $posts = CommonHelper::changeBlogKeys($posts);
 
         $model->setScenario(Blog::SCENARIO_UPDATE);
 

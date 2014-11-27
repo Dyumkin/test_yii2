@@ -9,6 +9,7 @@
 namespace frontend\widgets;
 
 use Yii;
+use common\components\helpers\CommonHelper;
 use common\models\Comments;
 use frontend\assets\AppAsset;
 use yii\base\InvalidConfigException;
@@ -42,8 +43,8 @@ class Comment extends \yii\bootstrap\Widget
     public function run()
     {
         $class = $this->model;
-        $class = crc32($class::className());
-        $models = Comments::getTree($this->model->id, $class);
+        $class = CommonHelper::generateCRC32Hash($class::className());
+        $models = Comments::getTree($this->model->id, (int)$class);
         $model = new Comments();
         $model->model_class = $class;
         $model->model_id = $this->model->id;

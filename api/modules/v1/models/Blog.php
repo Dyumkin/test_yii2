@@ -9,9 +9,12 @@
 
 namespace api\modules\v1\models;
 
+use \common\models\Blog as CommonBlog;
 
-
-class Blog extends \common\models\Blog
+class Blog extends CommonBlog
 {
-
+    public function getParentClassName()
+    {
+        return get_parent_class($this);
+    }
 }
