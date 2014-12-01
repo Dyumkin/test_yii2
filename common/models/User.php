@@ -31,6 +31,27 @@ class User extends ActiveRecord implements IdentityInterface
     const ROLE_ADMIN = 5;
 
     /**
+     * @return array Status array
+     */
+    public static function getStatusArray()
+    {
+        return [
+            self::STATUS_ACTIVE => Yii::t('user', 'STATUS_ACTIVE'),
+            self::STATUS_DELETED => Yii::t('user', 'STATUS_DELETED')
+        ];
+    }
+
+    /**
+     * @return array Roles array
+     */
+    public static function getRolesArray()
+    {
+        return [
+            self::ROLE_ADMIN => Yii::t('user', 'ROLE_ADMIN'),
+            self::ROLE_USER => Yii::t('user', 'ROLE_USER')
+        ];
+    }
+    /**
      * @inheritdoc
      */
     public static function tableName()
@@ -204,5 +225,16 @@ class User extends ActiveRecord implements IdentityInterface
         }
 
         return true;
+    }
+
+    /**
+     * Delete User.
+     *
+     * @return boolean Whether comment was deleted or not
+     */
+    public function deleteUser()
+    {
+        $this->status = self::STATUS_DELETED;
+        return $this->save(false, ['status']);
     }
 }

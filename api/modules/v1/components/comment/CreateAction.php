@@ -10,7 +10,6 @@
 namespace api\modules\v1\components\comment;
 
 use Yii;
-use api\modules\v1\components\helpers\ApiHelper;
 use api\modules\v1\models\Comment;
 use yii\base\Model;
 use yii\helpers\Url;

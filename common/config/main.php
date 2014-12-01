@@ -37,6 +37,11 @@ return [
                     'sourceLanguage' => 'en',
                 ],
 
+                'user' => [
+                    'class' => 'yii\i18n\DbMessageSource',
+                    'sourceLanguage' => 'en',
+                ],
+
 
             ],
         ],
