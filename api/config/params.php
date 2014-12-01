@@ -1,5 +1,6 @@
 <?php
 return [
     'adminEmail' => 'admin@example.com',
-    'api.user.pageSize' => 5
+    'api.user.pageSize' => 10,
+    'api.blog.pageSize' => 10,
 ];

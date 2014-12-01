@@ -9,6 +9,7 @@
 
 namespace api\modules\v1\components\blog;
 
+use Yii;
 use yii\rest\IndexAction as RestIndex;
 use yii\data\ActiveDataProvider;
 
@@ -25,7 +26,10 @@ class IndexAction extends RestIndex
         $modelClass = $this->modelClass;
 
         return new ActiveDataProvider([
-            'query' => $modelClass::find()->with('blogLangs')->asArray()
+            'query' => $modelClass::find()->with('blogLangs')->asArray(),
+            'pagination' => [
+                'pageSize' => Yii::$app->params['api.blog.pageSize']
+            ]
         ]);
     }
 }
