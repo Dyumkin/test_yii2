@@ -58,8 +58,9 @@ class AuthController extends ActiveController{
             $model = new LoginForm();
         }
         if ($model->load(Yii::$app->getRequest()->getBodyParams(), '') && $model->login()) {
-            return $model->getUser()->access_token;
+            return $model->getUser()->getData();
         } else {
+            Yii::$app->getResponse()->setStatusCode(401);
             return $model->errors;
         }
     }
