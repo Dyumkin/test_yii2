@@ -44,8 +44,8 @@ return [
             'rules' => [
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => ['v1/blog', 'v1/country', 'v1/comment', 'v1/user'],
-                    'extraPatterns' => ['POST signup' => 'signup'],
+                    'controller' => ['v1/blog', 'v1/country', 'v1/comment', 'v1/user', 'v1/auth'],
+                    'extraPatterns' => ['POST signup' => 'signup', 'POST login' => 'login'],
                     'pluralize' => false
                 ]
             ],        
