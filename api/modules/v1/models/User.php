@@ -26,21 +26,4 @@ class User extends CommonUser
         Yii::$app->getResponse()->getHeaders()->set('WWW-Authenticate', "Bearer realm=\"{$this->access_token}\"");
     }
 
-    public function getData()
-    {
-
-        $data = $this->getAttributes();
-        unset($data['auth_key']);
-        unset($data['password_hash']);
-        unset($data['password_reset_token']);
-        unset($data['access_token']);
-
-        $status = ArrayHelper::getValue($this->getStatusArray(),$data['status']);
-        $role = ArrayHelper::getValue($this->getRolesArray(),$data['role']);
-
-        $fullData = array_replace($data, ['status' => $status, 'role' => $role]);
-
-        return $fullData;
-    }
-
 }

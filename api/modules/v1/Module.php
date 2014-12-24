@@ -13,5 +13,6 @@ class Module extends \yii\base\Module
 
         //need in Chrome
         \Yii::$app->getResponse()->getHeaders()->set('Access-Control-Allow-Origin', '*');
+        \Yii::$app->getResponse()->getHeaders()->set('Access-Control-Allow-Headers', 'Accept, X-Requested-With, Content-Type, WWW-Authenticate');
     }
 }

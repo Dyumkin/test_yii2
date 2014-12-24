@@ -25,8 +25,17 @@ class AuthController extends ActiveController{
     protected function verbs()
     {
         return [
-            'login' => ['POST'],
-            'signup' => ['POST']
+            'login' => ['POST', 'OPTIONS'],
+            'signup' => ['POST', 'OPTIONS']
+        ];
+    }
+
+    public function actions()
+    {
+        return [
+            'options' => [
+                'class' => 'yii\rest\OptionsAction',
+            ],
         ];
     }
 
@@ -60,7 +69,7 @@ class AuthController extends ActiveController{
         if ($model->load(Yii::$app->getRequest()->getBodyParams(), '') && $model->login()) {
             return $model->getUser()->getData();
         } else {
-            Yii::$app->getResponse()->setStatusCode(401);
+            //Yii::$app->getResponse()->setStatusCode(501);
             return $model->errors;
         }
     }

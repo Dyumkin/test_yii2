@@ -47,7 +47,9 @@ return [
                     'controller' => ['v1/blog', 'v1/country', 'v1/comment', 'v1/user', 'v1/auth'],
                     'extraPatterns' => ['POST signup' => 'signup', 'POST login' => 'login'],
                     'pluralize' => false
-                ]
+                ],
+                'OPTIONS v1/auth/login' => 'v1/auth/login',
+                'POST v1/auth/login' => 'v1/auth/login',
             ],        
         ]
     ],
