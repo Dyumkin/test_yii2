@@ -5,6 +5,7 @@ use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 use yii\web\IdentityInterface;
 
 /**
@@ -236,5 +237,21 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->status = self::STATUS_DELETED;
         return $this->save(false, ['status']);
+    }
+
+    public function getData()
+    {
+
+        $data = $this->getAttributes();
+        unset($data['auth_key']);
+        unset($data['password_hash']);
+        unset($data['password_reset_token']);
+
+        $status = ArrayHelper::getValue($this->getStatusArray(),$data['status']);
+        $role = ArrayHelper::getValue($this->getRolesArray(),$data['role']);
+
+        $fullData = array_replace($data, ['status' => $status, 'role' => $role]);
+
+        return ['user' => $fullData];
     }
 }
